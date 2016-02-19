@@ -1,0 +1,41 @@
+{% extends 'base_template.html' %}
+
+{% block nav_index %}class="active"{% endblock %}
+
+{% block content %}
+<h1 class="page-header">Dashboard</h1>
+<h2>Now is {{ time_now }}</h2>
+<table class="table table-striped">
+	<tr>
+		<th>Description</th>
+		<th>Last</th>
+		<th>Next</th>
+	</tr>
+	<tr>
+		<td>Checked new products</td>
+		<td>{{ last_collect_products_run }}</td>
+		<td>{{ next_collect_products_run }}</td>
+	</tr>
+	<tr>
+		<td>Updated prices on them</td>
+		<td>{{ last_update_items_run }}</td>
+		<td>{{ next_process_items_run }}</td>
+	</tr>
+	<tr>
+		<td>Compared prices and emailed the result</td>
+		<td>{{ last_process_items_run }}</td>
+		<td>{{ next_process_items_run }}</td>
+	</tr>
+</table>
+<a class="btn btn-primary" href="{% url 'run_collect_product_items_spider' %}" role="button">Check for new products</a>
+<a class="btn btn-primary" href="{% url 'run_update_items_spider' %}" role="button">Update prices on products</a>
+<a class="btn btn-primary" href="{% url 'run_process_collected_items_spider' %}" role="button">Process products and email the result</a>
+{% if running_spiders %}
+	<h3>Running spiders: </h3>
+	<ul>
+	{% for spider in running_spiders %}
+		<li>{{ spider.spider }} (start time: {{ spider.start_time }})</li>
+	{% endfor %}
+	</ul>
+{% endif %}
+{% endblock %}
