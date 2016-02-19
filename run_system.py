@@ -11,6 +11,7 @@ django.setup()
 import urllib2
 import time
 import json
+from ebot_settings import *
 from subprocess import Popen
 from datetime import datetime
 from ebay_bot_config.models import Parameter
@@ -27,7 +28,7 @@ last_update_items_run = Parameter.objects.get(name='last_update_items_run')
 
 while True:
 	spiders = ["collect_product_items_spider", "process_collected_items_spider", "update_items_spider"]
-	x = urllib2.urlopen("http://localhost:6800/listjobs.json?project=ebay_crawler")
+	x = urllib2.urlopen(SCRAPYD_URL + "listjobs.json?project=ebay_crawler")
 	status = json.loads(x.read())
 
 	running_spiders = status["running"]
