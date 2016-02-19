@@ -1,0 +1,2 @@
+# ebot
+Automatic EBay crawler
