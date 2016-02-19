@@ -1,0 +1,22 @@
+{% extends 'base_template.html' %}
+
+{% block navigation %}
+<ul class="nav nav-sidebar">
+	<li><a href="{% url 'show_main_page' %}">Overview <span class="sr-only">(current)</span></a></li>
+	<li><a href="{% url 'list_products' %}">Products</a></li>
+	<li class="active"><a href="{% url 'upload' %}">Upload</a></li>
+  </ul>
+{% endblock %}
+
+{% block content %}
+
+<h2>Upload results</h2>
+
+{% for row in imported_products %}
+	{{ row.product_name }}<br />
+{% endfor %}
+
+<h3>Proceed to <a href="{% url 'list_products' %}">products</a>.</h3>
+
+{% endblock %}
+

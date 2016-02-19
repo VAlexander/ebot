@@ -1,0 +1,33 @@
+{% extends 'base_template.html' %}
+
+{% block navigation %}
+<ul class="nav nav-sidebar">
+	<li><a href="{% url 'show_main_page' %}">Overview <span class="sr-only">(current)</span></a></li>
+	<li class="active"><a href="{% url 'list_products' %}">Products</a></li>
+	<li><a href="{% url 'upload' %}">Upload</a></li>
+  </ul>
+{% endblock %}
+
+{% block content %}
+<h2>Products</h2>
+
+<table class="table table-striped">
+	<tr>
+		<th>Name</th>
+		<th>Price</th>
+		<th>Email</th>
+		<th>Negative words</th>
+		<th>Delete</th>
+	</tr>
+	{% for product in products %}
+	<tr>
+		<td><a href="{% url 'product_details' product.id %}">{{ product.product_name }}</a></td>
+		<td>{{ product.strike_price }}</td>
+		<td>{{ product.email }}</td>
+		<td>{{ product.negative_words }}</td>
+		<td><a href="{% url 'delete_product' product.id %}">[X]</a></td>
+	</tr>
+	{% endfor %}
+</table>
+<a class="btn btn-primary" href="{% url 'delete_all_products' %}" role="button">Delete all products</a>
+{% endblock %}

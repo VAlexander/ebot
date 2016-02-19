@@ -1,0 +1,25 @@
+{% extends 'base_template.html' %}
+
+{% block navigation %}
+<ul class="nav nav-sidebar">
+	<li><a href="{% url 'show_main_page' %}">Overview <span class="sr-only">(current)</span></a></li>
+	<li><a href="{% url 'list_products' %}">Products</a></li>
+	<li class="active"><a href="{% url 'upload' %}">Upload</a></li>
+  </ul>
+{% endblock %}
+
+{% block content %}
+
+<h2>Upload</h2>
+
+<form action="{% url 'upload' %}" method="post" enctype="multipart/form-data">
+	{% csrf_token %}
+	<div class="form-group">
+		<label for="csvFile">Select csv to upload:</label>
+		<input type="file" name="csvFile" id="csvFile">
+	</div>
+    
+    <input type="submit" class="btn btn-default" value="Upload CSV" name="submit">
+</form>
+
+{% endblock %}
